@@ -1,27 +1,24 @@
-
-var stream = require( 'stream' )
+var path = require( 'path' )
+var fs = require( 'fs' )
+var os = require( 'osenv' )
+var pkg = require( '../package.json' )
 var test = require( 'tape' )
 var Transform = require( '../dist/transform' )
+
+var fixtureCompiled = 'body {\n  -webkit-transform: scale( 2 );\n          transform: scale( 2 );\n}\n'
 
 test( 'Transform stream produces prefixed css', function( t ) {
     t.plan( 1 )
 
     var transform = new Transform()
+    var outPath = path.join( os.tmpdir(), pkg.name + '-' + Math.random() )
 
-    var tr = new stream.Duplex({
-        read: function( chunk ) {},
-        write: function( chunk, enc, next ) {
-            this._buffer += chunk
-            next()
-        }
-    })
-    tr._buffer = ''
-
-    tr.on( 'finish', function() {
-        t.equal( tr._buffer, 'grab the expected transform', 'transform stream autoprefixes css' )
-    })
-    tr.end( 'body { transform: scale( 2 ); }' )
-    tr.pipe( transform ).pipe( tr )
+    fs.createReadStream( __dirname + '/fixture.css' )
+        .pipe( transform )
+        .pipe( fs.createWriteStream( outPath )
+            .on( 'close', function() {
+                t.equal( fs.readFileSync( outPath, { encoding: 'utf8' } ), fixtureCompiled, 'Transform prefixes css' )
+            }))
 
 
 })

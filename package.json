@@ -26,9 +26,13 @@
     "url": "https://github.com/mattstyles/autoprefixer-transform/issues"
   },
   "homepage": "https://github.com/mattstyles/autoprefixer-transform",
-  "dependencies": {},
+  "dependencies": {
+    "autoprefixer-core": "^5.1.9",
+    "core-js": "^0.8.3"
+  },
   "devDependencies": {
     "babel": "^5.1.8",
+    "osenv": "^0.1.0",
     "tape": "^4.0.0"
   }
 }
