@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattstyles/autoprefixer-transform.git"
+    "url": "git://github.com/flawless/autoprefixer-transform.git"
   },
   "keywords": [
     "autoprefixer",
@@ -23,9 +23,9 @@
   "author": "Matt Styles",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/mattstyles/autoprefixer-transform/issues"
+    "url": "https://github.com/flawless/autoprefixer-transform/issues"
   },
-  "homepage": "https://github.com/mattstyles/autoprefixer-transform",
+  "homepage": "https://github.com/flawless/autoprefixer-transform",
   "dependencies": {
     "autoprefixer-core": "^5.1.9",
     "core-js": "^0.8.3"
