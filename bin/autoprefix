@@ -14,6 +14,9 @@
  * autoprefix ./spec/fixture.css
  * autoprefix -e ./spec/fixture.css > test.css
  * autoprefix < ./spec/fixture.css -o test.css
+ *
+ * @usage with ho
+ * ho ./src/styles.less | autoprefix > styles.css
  */
 
 var fs = require( 'fs' )
@@ -23,8 +26,8 @@ var Transform = require( '../dist/transform' )
 var transformer = new Transform()
 
 // Try to check that an input is present
-if ( process.stdin.isTTY && !argv._[ 0 ] ) {
-    log.error( 'Supply input file' )
+if ( process.stdin.isTTY && !argv._[ 0 ] && !argv.e && !argv.entry ) {
+    console.error( '[autoprefixer-transform] Supply input file' )
     process.exit( 1 )
 }
 
