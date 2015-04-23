@@ -9,11 +9,13 @@
  * @argument filename to stream into autoprefixer
  * @flag -e --entry _optional_ input file path
  * @flag -o --output  _optional_ path to output to, or uses stdout
+ * @flag -b --browsers _optional_ browsers to prefix for, defaults to "last 2 versions"
  *
  * @usage
  * autoprefix ./spec/fixture.css
  * autoprefix -e ./spec/fixture.css > test.css
  * autoprefix < ./spec/fixture.css -o test.css
+ * autoprefix -b "last 2 versions" < ./spec.fixture.css
  *
  * @usage with ho
  * ho ./src/styles.less | autoprefix > styles.css
@@ -23,7 +25,12 @@ var fs = require( 'fs' )
 var argv = require( 'minimist' )( process.argv.slice( 2 ) )
 var Transform = require( '../dist/transform' )
 
-var transformer = new Transform()
+var opts = {}
+if ( argv.b || argv.browsers ) {
+    opts.browsers = argv.b || argv.browsers
+}
+
+var transformer = new Transform( opts )
 
 // Try to check that an input is present
 if ( process.stdin.isTTY && !argv._[ 0 ] && !argv.e && !argv.entry ) {
