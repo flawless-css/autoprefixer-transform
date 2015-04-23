@@ -23,7 +23,7 @@
 
 var fs = require( 'fs' )
 var argv = require( 'minimist' )( process.argv.slice( 2 ) )
-var Transform = require( '../dist/transform' )
+var Transform = require( '../dist' )
 
 var opts = {}
 if ( argv.b || argv.browsers ) {

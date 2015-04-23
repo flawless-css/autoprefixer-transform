@@ -3,7 +3,7 @@ var fs = require( 'fs' )
 var os = require( 'osenv' )
 var pkg = require( '../package.json' )
 var test = require( 'tape' )
-var Transform = require( '../dist/transform' )
+var Transform = require( '../dist' )
 
 var fixtureCompiled = 'body {\n  -webkit-transform: scale( 2 );\n          transform: scale( 2 );\n}\n'
 
@@ -28,7 +28,7 @@ test( 'Browsers to prefix for should be passed through to autoprefixer', functio
     var transform = new Transform({
         browsers: [ 'chrome 40' ]
     })
-    
+
     var outPath = path.join( os.tmpdir(), pkg.name + '-' + Math.random() )
     var expectedOutput = 'body { transform: scale( 2 ); }\n'
 
