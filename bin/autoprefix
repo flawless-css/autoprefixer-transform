@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+/**
+ * autoprefixer-transform
+ * ---
+ *
+ * `autoprefix`
+ *
+ * @argument filename to stream into autoprefixer
+ * @flag -e --entry _optional_ input file path
+ * @flag -o --output  _optional_ path to output to, or uses stdout
+ *
+ * @usage
+ * autoprefix ./spec/fixture.css
+ * autoprefix -e ./spec/fixture.css > test.css
+ * autoprefix < ./spec/fixture.css -o test.css
+ */
+
+var fs = require( 'fs' )
+var argv = require( 'minimist' )( process.argv.slice( 2 ) )
+var Transform = require( '../dist/transform' )
+
+var transformer = new Transform()
+
+// Try to check that an input is present
+if ( process.stdin.isTTY && !argv._[ 0 ] ) {
+    log.error( 'Supply input file' )
+    process.exit( 1 )
+}
+
+var filepath = argv._[ 0 ] || argv.e || argv.entry
+var input = filepath
+    ? fs.createReadStream( filepath )
+    : process.stdin
+
+var outpath = argv.o || argv.output
+var output = outpath
+    ? fs.createWriteStream( outpath )
+    : process.stdout
+
+input.pipe( transformer ).pipe( output )

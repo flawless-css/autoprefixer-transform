@@ -2,6 +2,9 @@
   "name": "autoprefixer-transform",
   "version": "0.2.0",
   "description": "Autoprefixer transform stream",
+  "bin": {
+    "autoprefix": "./bin/autoprefix"
+  },
   "main": "dist/transform.js",
   "scripts": {
     "test": "tape ./spec/*.js",
@@ -28,7 +31,8 @@
   "homepage": "https://github.com/flawless/autoprefixer-transform",
   "dependencies": {
     "autoprefixer-core": "^5.1.9",
-    "core-js": "^0.8.3"
+    "core-js": "^0.8.3",
+    "minimist": "^1.1.1"
   },
   "devDependencies": {
     "babel": "^5.1.8",
